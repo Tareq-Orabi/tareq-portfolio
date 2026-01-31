@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend API Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>API Test Dashboard</h1>
+    <p>Ensure your PHP server is running on <code>http://localhost:8000</code></p>
+
+    <!-- Projects Section -->
+    <section>
+        <h2>Projects API</h2>
+        <button onclick="fetchProjects()">Fetch Projects</button>
+        <pre id="projects-output">Waiting...</pre>
+    </section>
+
+    <!-- Info Section -->
+    <section>
+        <h2>Info API (Skills & About)</h2>
+        <button onclick="fetchInfo()">Fetch Info</button>
+        <pre id="info-output">Waiting...</pre>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section>
+        <h2>Contact API</h2>
+        <form id="contact-form" onsubmit="submitForm(event)">
+            <input type="text" id="name" placeholder="Name" value="Test User" required><br><br>
+            <input type="email" id="email" placeholder="Email" value="test@example.com" required><br><br>
+            <textarea id="message" placeholder="Message" required>This is a test message.</textarea><br><br>
+            <button type="submit">Send Message</button>
+        </form>
+        <pre id="contact-output">Result will appear here...</pre>
+    </section>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api';
+
+        async function fetchProjects() {
+            try {
+                const response = await fetch(`${API_BASE}/projects.php`);
+                const data = await response.json();
+                document.getElementById('projects-output').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('projects-output').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function fetchInfo() {
+            try {
+                const response = await fetch(`${API_BASE}/info.php`);
+                const data = await response.json();
+                document.getElementById('info-output').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('info-output').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function submitForm(e) {
+            e.preventDefault();
+            const output = document.getElementById('contact-output');
+            output.textContent = 'Sending...';
+
+            const payload = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/contact.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                output.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                output.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+
+</html>
