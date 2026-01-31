@@ -1,0 +1,974 @@
+/* -----------------------------------------------------------
+   1. CORE VARIABLES (Warm Charcoal & Vibrant Orange)
+----------------------------------------------------------- */
+:root {
+    /* Base Colors - Softened Dark Mode */
+    --bg-dark: #18181b;
+    /* Zinc-900: Soft Charcoal, not black */
+    --bg-card: #27272a;
+    /* Zinc-800: Lighter Charcoal */
+    --bg-card-hover: #3f3f46;
+    /* Zinc-700 */
+    --border: rgba(255, 255, 255, 0.08);
+
+    /* The Orange Spectrum */
+    --orange-100: #ffedd5;
+    --orange-400: #fb923c;
+    --orange-500: #f97316;
+    /* Main Primary */
+    --orange-600: #ea580c;
+    /* Deep Burnt */
+    --orange-glow: rgba(249, 115, 22, 0.4);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--orange-400), var(--orange-600));
+    --gradient-surface: linear-gradient(180deg, rgba(249, 115, 22, 0.03), transparent);
+
+    /* Typography */
+    --text-main: #f4f4f5;
+    /* Soft White */
+    --text-muted: #a1a1aa;
+    /* Warm Grey */
+
+    /* Fonts (Switched to Outfit for a friendlier, modern feel) */
+    --font-main: 'Outfit', sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* -----------------------------------------------------------
+   2. GLOBAL RESETS & UTILITIES
+----------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: var(--orange-500);
+    color: white;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    line-height: 1.7;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Scroll Progress Bar */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--orange-400), var(--orange-600));
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px var(--orange-glow);
+}
+
+/* Utility Classes */
+.text-muted-lg {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    margin-bottom: 35px;
+    max-width: 520px;
+    line-height: 1.85;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.text-muted-sm {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 12px 0;
+}
+
+.text-muted-xs {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.flex-gap {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* Background Noise */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Ambient Orbs (Warm & Wide) */
+.ambient-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -2;
+    will-change: transform;
+    animation: floatOrb 14s infinite alternate ease-in-out;
+    opacity: 0.12;
+    /* Increased opacity for warmth */
+}
+
+.orb-1 {
+    top: -10%;
+    left: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: var(--orange-500);
+}
+
+.orb-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--orange-600);
+    animation-delay: -5s;
+}
+
+@keyframes floatOrb {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(40px, 40px, 0);
+    }
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+/* Dominant Orange Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #fff 20%, var(--orange-100) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-accent {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+/* -----------------------------------------------------------
+   3. NAVIGATION
+----------------------------------------------------------- */
+nav {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(39, 39, 42, 0.75);
+    backdrop-filter: blur(20px);
+    /* Lighter glass */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 35px;
+    border-radius: 50px;
+    display: flex;
+    gap: 35px;
+    z-index: 100;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--orange-400);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 20px;
+    height: 2px;
+    background: var(--orange-500);
+    border-radius: 2px;
+    transition: transform 0.3s var(--ease-out);
+    box-shadow: 0 0 10px var(--orange-500);
+}
+
+nav a:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* -----------------------------------------------------------
+   4. BUTTONS
+----------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-main);
+    letter-spacing: 0.02em;
+}
+
+/* Vibrant Gradient Button */
+.btn-primary {
+    background: var(--gradient-primary);
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 25px -5px var(--orange-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 15px 35px -5px var(--orange-glow);
+    filter: brightness(1.1);
+}
+
+/* Soft Outline Button */
+.btn-outline {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-outline:hover {
+    border-color: var(--orange-500);
+    color: var(--orange-400);
+    background: rgba(249, 115, 22, 0.08);
+}
+
+/* -----------------------------------------------------------
+   5. HERO SECTION
+----------------------------------------------------------- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+}
+
+.role-badge {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--orange-400);
+    background: rgba(249, 115, 22, 0.12);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    padding: 8px 16px;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 24px;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Pulse Status Dot */
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse-green 2s infinite ease-in-out;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.hero h1 {
+    font-size: clamp(3.2rem, 5vw, 4.8rem);
+    line-height: 1.1;
+    margin-bottom: 28px;
+}
+
+.terminal-wrapper {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.terminal {
+    background: #1e1e20;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Orange tint on terminal header */
+.terminal-header {
+    background: #252527;
+    padding: 14px 20px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    align-items: center;
+}
+
+.terminal-title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.7;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    font-weight: 500;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.dot.one {
+    background: #3f3f46;
+}
+
+.dot.two {
+    background: #52525b;
+}
+
+.dot.three {
+    background: var(--orange-500);
+    box-shadow: 0 0 10px var(--orange-glow);
+}
+
+.terminal-body {
+    padding: 30px;
+    font-family: var(--font-code);
+    font-size: 14px;
+    color: #d4d4d8;
+    min-height: 240px;
+}
+
+.code-keyword {
+    color: var(--orange-400);
+}
+
+.code-string {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.code-func {
+    color: #fed7aa;
+}
+
+/* -----------------------------------------------------------
+   6. SECTIONS & CARDS (Breathable Design)
+----------------------------------------------------------- */
+section {
+    padding: 150px 0;
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 80px;
+    max-width: 600px;
+    position: relative;
+}
+
+/* Orange decorative line */
+.section-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -20px;
+    width: 40px;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    margin-bottom: 18px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+}
+
+.spotlight-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s var(--ease-out), border-color 0.4s;
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+    /* Subtle inner orange tint gradient at bottom */
+    background-image: var(--gradient-surface);
+    background-image: var(--gradient-surface);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    /* Ensure background doesn't bleed over border area */
+    background-clip: padding-box;
+}
+
+/* Glow Logic - WARMER */
+/* Glow Logic - REMOVED (Static Hover below) */
+
+
+.spotlight-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--orange-500);
+    background-color: rgba(249, 115, 22, 0.05);
+}
+
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Icons are ALWAYS Orange now */
+.icon-large {
+    font-size: 70px;
+    color: var(--orange-500);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 25px var(--orange-glow));
+    margin-bottom: 10px;
+}
+
+.icon-card {
+    color: var(--orange-500);
+    font-size: 26px;
+    margin-bottom: 22px;
+    background: rgba(249, 115, 22, 0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+/* Tags */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 30px;
+}
+
+.tag {
+    font-family: var(--font-code);
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+
+/* Tag Hover: Orange */
+.spotlight-card:hover .tag {
+    border-color: var(--orange-500);
+    color: var(--orange-100);
+    background: rgba(249, 115, 22, 0.15);
+}
+
+/* -----------------------------------------------------------
+   7. TIMELINE
+----------------------------------------------------------- */
+.timeline {
+    position: relative;
+    padding-left: 50px;
+    border-left: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 70px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -58px;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    background: var(--bg-dark);
+    border: 3px solid var(--orange-600);
+    /* Darker orange border */
+    border-radius: 50%;
+    transition: all 0.3s;
+    box-shadow: 0 0 0 4px var(--bg-dark);
+    /* Gap effect */
+}
+
+.timeline-item:hover .timeline-marker {
+    background: var(--orange-500);
+    border-color: var(--orange-400);
+    box-shadow: 0 0 0 4px var(--bg-dark), 0 0 10px var(--orange-glow);
+    transform: scale(1.05);
+}
+
+.timeline-date {
+    font-family: var(--font-code);
+    color: var(--orange-400);
+    opacity: 0.85;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.role {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 6px;
+}
+
+.company {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* -----------------------------------------------------------
+   TECH MATRIX STYLES
+----------------------------------------------------------- */
+.tech-matrix-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.4s var(--ease-out);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.tech-matrix-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    /* Slight base visibility */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Border Tracing Effect */
+.tech-matrix-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    /* Border width */
+    background: radial-gradient(600px circle at var(--x) var(--y),
+            rgba(249, 115, 22, 0.8),
+            transparent 40%);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    /* Hidden by default, shown via JS/Hover */
+    transition: opacity 0.3s;
+}
+
+.tech-matrix-card:hover::before {
+    opacity: 1;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.matrix-icon {
+    font-size: 20px;
+    color: var(--orange-500);
+}
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill-chip {
+    background: #27272a;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: default;
+}
+
+.skill-chip:hover {
+    color: var(--orange-500);
+    border-color: var(--orange-500);
+    background: rgba(249, 115, 22, 0.1);
+}
+
+.micro-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.micro-bar {
+    height: 100%;
+    background: var(--orange-500);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tech-matrix-card.active .micro-bar {
+    transform: scaleX(1);
+}
+
+/* -----------------------------------------------------------
+   8. PROJECTS (Folder Style)
+----------------------------------------------------------- */
+.project-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 24px;
+}
+
+.folder-icon {
+    font-size: 28px;
+    color: var(--orange-500);
+}
+
+.project-links a {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-left: 16px;
+    transition: 0.3s;
+}
+
+.project-links a:hover {
+    color: var(--orange-400);
+    transform: translateY(-2px);
+}
+
+.problem-solution {
+    margin: 18px 0;
+    font-size: 15px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    padding-left: 18px;
+    transition: border-color 0.3s;
+}
+
+.spotlight-card:hover .problem-solution {
+    border-left-color: var(--orange-500);
+}
+
+.problem-solution strong {
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.problem-solution span {
+    color: var(--text-muted);
+}
+
+/* -----------------------------------------------------------
+   9. CONTACT
+----------------------------------------------------------- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-input {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-family: var(--font-main);
+    transition: all 0.3s;
+    font-size: 15px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--orange-500);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+.contact-email {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* -----------------------------------------------------------
+   10. ANIMATIONS
+----------------------------------------------------------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-1 {
+    transition-delay: 0.1s;
+}
+
+.stagger-2 {
+    transition-delay: 0.2s;
+}
+
+.stagger-3 {
+    transition-delay: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .ambient-orb {
+        animation: none;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .hero-grid,
+    .contact-grid,
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .hero {
+        text-align: center;
+        justify-content: center;
+        padding-top: 130px;
+    }
+
+    .hero-btns {
+        justify-content: center;
+    }
+
+    nav {
+        width: 90%;
+        justify-content: space-between;
+        padding: 12px 20px;
+        top: 15px;
+    }
+
+    .spotlight-card:hover {
+        transform: none;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+    }
+}
+/* -----------------------------------------------------------
+   9. PROFILE IMAGE
+----------------------------------------------------------- */
+.profile-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+.profile-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px -15px rgba(249, 115, 22, 0.15);
+    border-color: var(--orange-500);
+}
+
+.profile-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter:  grayscale(10%) contrast(1.1);
+    transition: filter 0.4s;
+}
+
+.profile-wrapper:hover .profile-img {
+    filter: grayscale(0%) contrast(1.1);
+}
+
+/* Optional: Add a subtle overlay or border effect */
+.profile-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    pointer-events: none;
+    z-index: 2;
+}

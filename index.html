@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio of Tareq Orabi, Junior Software Engineer focused on backend development and real-world experience.">
+    <title>Tareq Orabi | Junior Backend Software Engineer</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+
+    <div class="noise-overlay"></div>
+    <div id="scroll-progress"></div>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <nav class="reveal">
+        <a href="#about" class="active">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Exp</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main class="container">
+
+        <section class="hero" id="about">
+            <div class="hero-grid">
+                <article class="hero-content reveal">
+                    <div class="role-badge"><i class="fas fa-code" style="margin-right:8px;"></i> Software Engineer |
+                        Backend Developer
+                    </div>
+                    <h1>
+                        Hi, I'm <span class="gradient-accent scramble-text" data-value="Tareq Orabi">Tareq
+                            Orabi</span>.<br>
+                        Software Engineer focused on <span class="gradient-text">Backend Development</span>.
+                    </h1>
+
+                    <p class="text-muted-lg">
+                        Dedicated Software Engineer with a strong focus on Backend Development.
+                        Experienced in enterprise-level environments, particularly in Identity and Access Management
+                        (IAM) systems.
+                        Proficient in Java and ASP.NET Core, with strong skills in debugging, code refactoring, and
+                        backend system implementation.
+                    </p>
+
+
+                    <div class="hero-btns flex-gap">
+                        <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact" class="btn btn-outline">Contact Me</a>
+                    </div>
+                </article>
+
+                <div class="terminal-wrapper reveal stagger-2" id="tilt-terminal">
+                    <div class="terminal">
+                        <header class="terminal-header">
+                            <div class="dot one"></div>
+                            <div class="dot two"></div>
+                            <div class="dot three"></div>
+                            <div class="terminal-title">~/projects/tareq_orabi.js</div>
+                            <span class="text-muted-xs" style="margin-left:auto; font-weight:600;">bash — zsh</span>
+                        </header>
+                        <div class="terminal-body" id="typewriter" aria-label="Code Snippet">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-details">
+            <div class="grid-container grid-2">
+                <div class="reveal">
+                    <div class="reveal">
+                        <div class="profile-wrapper">
+                            <img src="assets/img/profile.jpg" alt="Tareq Orabi - Profile" class="profile-img">
+                        </div>
+                    </div>
+                </div>
+                <article class="reveal stagger-1">
+                    <div class="section-header" style="margin-bottom:30px;">
+                        <h2>Professional <span class="gradient-accent">Summary</span></h2>
+                    </div>
+                    <p class="mb-20" style="color:var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
+                        Dedicated Software Engineer with a strong focus on <strong>Backend Development</strong>.
+                        Gained practical experience in enterprise environments, specifically working on Identity and
+                        Access Management (<strong>IAM</strong>) systems.
+                        Professional in <strong>Java</strong> and ASP.NET Core, with a proven track record in code
+                        cleanup, debugging, and system implementation.
+                    </p>
+
+                    <div class="mb-30" style="margin-top:40px;">
+                        <h3 style="color:white; margin-bottom:15px; font-size:1.4rem;">Education</h3>
+                        <div style="border-left: 2px solid var(--orange-500); padding-left: 20px;">
+                            <h4 style="color: white; font-size:1.2rem; margin-bottom:5px;">Bachelor of Science in
+                                Software Engineering</h4>
+                            <span
+                                style="color:var(--orange-400); font-family:var(--font-code); font-size:0.9rem;">Al-Ahliyya
+                                Amman University</span>
+                            <p class="text-muted-xs" style="margin-top:5px; font-size:1rem;">October 2024 – Present
+                                (Second Year)</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-30" style="margin-top:40px;">
+                        <h3 style="color:white; margin-bottom:15px; font-size:1.4rem;">Soft Skills</h3>
+                        <div class="flex-gap">
+                            <span class="tag">Analytical Thinking</span>
+                            <span class="tag">Adaptability</span>
+                            <span class="tag">Professionalism</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="section-header reveal">
+                <h2>Technical <span class="gradient-text">Skills</span></h2>
+                <p class="text-muted-sm" style="font-size:1.1rem;">
+                    Tools and technologies I use and feel confident working with.
+                </p>
+
+            </div>
+
+            <div class="grid-container" id="skills-grid">
+                <p style="color:var(--text-muted); text-align:center; width:100%;">Loading technical arsenal...</p>
+            </div>
+
+        </section>
+
+        <section id="experience">
+            <div class="section-header reveal">
+                <h2>Professional <span class="gradient-text">Experience</span></h2>
+            </div>
+
+            <div class="timeline" id="experience-timeline">
+                <p style="color:var(--text-muted);">Loading experience timeline...</p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-header reveal">
+                <h2>Featured <span class="gradient-text">Projects</span></h2>
+                <p class="text-muted-sm" style="font-size:1.1rem;">
+                    Technical projects focused on backend development and system design.
+                </p>
+
+            </div>
+
+            <div class="grid-container" id="projects-grid">
+                <p style="color:var(--text-muted); text-align:center; width:100%;">Loading projects...</p>
+            </div>
+        </section>
+
+
+
+        <section id="contact" style="padding-bottom:50px;">
+            <div class="spotlight-card reveal">
+                <div class="card-content contact-grid">
+                    <div>
+                        <h2 class="gradient-accent" style="font-size:2.5rem; line-height:1.2; margin-bottom:20px;">Get
+                            In<br>Touch.</h2>
+                        <p class="mb-30" style="color:var(--text-muted); font-size:1.1rem;">
+                            I am open to opportunities where I can grow as a backend developer,
+                            learn from experienced teams, and contribute to real software projects.
+                            Feel free to reach out.
+                        </p>
+
+                        <div class="contact-email">
+                            <div class="icon-card" style="margin-bottom:0; width:40px; height:40px; font-size:18px;"><i
+                                    class="fas fa-envelope"></i></div>
+                            <span>tareqorabi66@gmail.com</span>
+                        </div>
+                        <div class="contact-email" style="margin-top:10px;">
+                            <div class="icon-card" style="margin-bottom:0; width:40px; height:40px; font-size:18px;"><i
+                                    class="fas fa-phone"></i></div>
+                            <span>+962 78 066 8491</span>
+                        </div>
+                        <div class="contact-email" style="margin-top:10px;">
+                            <div class="icon-card" style="margin-bottom:0; width:40px; height:40px; font-size:18px;"><i
+                                    class="fas fa-map-marker-alt"></i></div>
+                            <span>Amman, Jordan</span>
+                        </div>
+
+                        <div class="flex-gap mt-20">
+                            <a href="https://linkedin.com/in/tareq-orabi-bb67b839b" class="btn btn-outline"
+                                aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <form id="contactForm" name="contact" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contact" />
+                        <div class="form-group">
+                            <label for="name" class="sr-only">Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="sr-only">Message</label>
+                            <textarea id="message" name="message" class="form-input" rows="4" placeholder="Message"
+                                required></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100">Send Message</button>
+
+                        <div id="formStatus" class="mt-20" style="display:none; text-align:center; font-weight:600;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer
+            style="text-align:center; padding:30px; font-size:14px; color:var(--text-muted); opacity:0.6; border-top: 1px solid var(--border);">
+            &copy; 2026 Tareq Orabi.
+        </footer>
+    </main>
+
+    <script type="module" src="src/script.js"></script>
+</body>
+
+</html>

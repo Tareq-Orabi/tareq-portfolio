@@ -1,0 +1,46 @@
+(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))d(t);new MutationObserver(t=>{for(const r of t)if(r.type==="childList")for(const e of r.addedNodes)e.tagName==="LINK"&&e.rel==="modulepreload"&&d(e)}).observe(document,{childList:!0,subtree:!0});function p(t){const r={};return t.integrity&&(r.integrity=t.integrity),t.referrerPolicy&&(r.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?r.credentials="include":t.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function d(t){if(t.ep)return;t.ep=!0;const r=p(t);fetch(t.href,r)}})();const y=[{name:"HTML",category:"frontend",display_order:1},{name:"CSS",category:"frontend",display_order:2},{name:"JavaScript",category:"frontend",display_order:3},{name:"PHP",category:"backend",display_order:1},{name:"MySQL",category:"backend",display_order:2}],h=[{title:"Portfolio Website",description:"My personal portfolio built with Vanilla JS and PHP.",image_url:"assets/portfolio.jpg",repo_url:"#",live_url:"#",is_featured:1,display_order:1},{title:"E-commerce Store",description:"A full-stack e-commerce solution.",image_url:"assets/ecommerce.jpg",repo_url:"#",live_url:"#",is_featured:0,display_order:2}],v=[{role:"Software Engineer",company:"Tech Corp",duration:"2023 - Present",description:"Developing scalable backend systems and RESTful APIs."},{role:"Junior Developer",company:"Startup Inc",duration:"2021 - 2023",description:"Assisted in frontend development and bug fixing."}];document.addEventListener("DOMContentLoaded",()=>{async function i(){const t=document.getElementById("projects-grid");if(t)try{const r=h;t.innerHTML="",r.length>0&&r.forEach((e,l)=>{const o=`stagger-${l%3+1}`,s=document.createElement("article");s.className=`spotlight-card reveal ${o}`;const c=e.is_featured===1||e.is_featured===!0?'<div style="position:absolute; top:10px; right:10px; color:#fb923c; font-size:12px; font-weight:bold;"><i class="fas fa-star"></i> FEATURED</div>':"",u=e.repo_url||"#",m=e.live_url||"#";let f="";e.technologies&&(f='<div class="tech-tags">'+(Array.isArray(e.technologies)?e.technologies:e.technologies.split(",")).map(g=>`<span class="tag">${g.trim()}</span>`).join("")+"</div>"),s.innerHTML=`
+                        ${c}
+                        <div class="card-content">
+                            <div class="project-header-row">
+                                <i class="fas fa-folder folder-icon"></i>
+                                <div class="project-links">
+                                    <a href="${u}" target="_blank" aria-label="GitHub Repo"><i class="fab fa-github"></i></a>
+                                    <a href="${m}" target="_blank" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                            
+                            <h3>${e.title}</h3>
+                            
+                            <div class="problem-solution">
+                                <span>${e.description}</span>
+                            </div>
+
+                            ${f}
+                        </div>
+                    `,t.appendChild(s),window.revealObserver?window.revealObserver.observe(s):s.classList.add("active")})}catch(r){console.error("Projects Load Error",r),t.innerHTML="<p>Error loading projects.</p>"}}async function a(){const t=document.getElementById("skills-grid");if(t)try{const r=y;t.innerHTML="";const e={backend:{icon:"fa-server",title:"Backend & APIs",stagger:1},database:{icon:"fa-database",title:"Data Strategy",stagger:2},tools:{icon:"fa-tools",title:"DevOps & Tools",stagger:3}},l={};r.forEach(o=>{const s=o.category||"tools";l[s]||(l[s]=[]),l[s].push(o)}),Object.keys(e).forEach(o=>{const s=e[o],n=l[o]||[],c=document.createElement("article");c.className=`spotlight-card reveal stagger-${s.stagger}`;const u=n.map(m=>`<li style="margin-bottom:8px; color:#d4d4d8;"><i class="fas fa-check" style="color:var(--orange-500); margin-right:8px; font-size:12px;"></i>${m.name}</li>`).join("");c.innerHTML=`
+                   <div class="card-content">
+                        <div class="icon-card"><i class="fas ${s.icon}"></i></div>
+                        <h3 style="margin-bottom:20px;">${s.title}</h3>
+                        <ul style="list-style:none; padding:0;">
+                            ${u}
+                        </ul>
+                    </div>
+                `,t.appendChild(c),window.revealObserver?window.revealObserver.observe(c):c.classList.add("active")})}catch(r){console.error("Skills Load Error",r)}}async function p(){const t=document.getElementById("experience-timeline");if(t)try{const r=v;t.innerHTML="",r.forEach((e,l)=>{const o=`stagger-${l%2+1}`,s=document.createElement("article");s.className=`timeline-item reveal ${o}`;const n=e.description?e.description.replace(/\n/g,"<br>"):"";s.innerHTML=`
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date">${e.year_range}</span>
+                    <h3 class="role">${e.role}</h3>
+                    <h4 class="company">${e.company}</h4>
+                    <p class="text-muted-sm" style="margin-top:10px;">
+                        ${n}
+                    </p>
+                 `,t.appendChild(s),window.revealObserver?window.revealObserver.observe(s):s.classList.add("active")})}catch(r){console.error("Experience Load Error",r)}}window.revealObserver=new IntersectionObserver((t,r)=>{t.forEach(e=>{e.isIntersecting&&(e.target.classList.add("active"),r.unobserve(e.target))})},{threshold:.1}),document.querySelectorAll(".reveal").forEach(t=>window.revealObserver.observe(t)),i(),a(),p(),b();const d=document.getElementById("contactForm");d&&d.addEventListener("submit",async function(t){t.preventDefault();const r=document.getElementById("submitBtn"),e=document.getElementById("formStatus"),l=r.innerText;r.innerText="Sending...",r.disabled=!0,e.style.display="none";try{const o=new FormData(d),s=new URLSearchParams(o).toString();if((await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:s})).ok)e.style.display="block",e.style.color="#10b981",e.innerText="Message sent successfully! I'll be in touch.",d.reset();else throw new Error("Network response was not ok.")}catch(o){e.style.display="block",e.style.color="#ef4444",e.innerText="Error sending message. Please try again later.",console.error("Form Error:",o)}finally{r.innerText=l,r.disabled=!1}})});function b(){const i={mouseX:0,mouseY:0,isDesktop:window.matchMedia("(min-width: 900px)").matches},a={spotlightCards:document.querySelectorAll(".spotlight-card"),terminalWrapper:document.getElementById("tilt-terminal"),heroSection:document.querySelector(".hero"),typewriter:document.getElementById("typewriter"),scrambleText:document.querySelector(".scramble-text"),navLinks:document.querySelectorAll("nav a")};window.addEventListener("mousemove",o=>{i.mouseX=o.clientX,i.mouseY=o.clientY},{passive:!0}),window.addEventListener("resize",()=>{i.isDesktop=window.matchMedia("(min-width: 900px)").matches,a.spotlightCards=document.querySelectorAll(".spotlight-card")},{passive:!0});function p(){i.isDesktop&&(d(),t()),requestAnimationFrame(p)}function d(){document.querySelectorAll(".spotlight-card").forEach(s=>{const n=s.getBoundingClientRect();if(i.mouseX>n.left-200&&i.mouseX<n.right+200&&i.mouseY>n.top-200&&i.mouseY<n.bottom+200){const c=i.mouseX-n.left,u=i.mouseY-n.top;s.style.setProperty("--mouse-x",`${c}px`),s.style.setProperty("--mouse-y",`${u}px`)}})}function t(){if(!a.terminalWrapper||!a.heroSection)return;const o=a.heroSection.getBoundingClientRect();if(o.bottom<0||o.top>window.innerHeight)return;const s=i.mouseX-o.left,n=i.mouseY-o.top,c=s/o.width-.5,u=n/o.height-.5;a.terminalWrapper.style.transform=`rotateX(${u*-6}deg) rotateY(${c*6}deg)`}requestAnimationFrame(p);function r(){if(!a.typewriter)return;const o=`
+<span class="code-keyword">class</span> TareqOrabi <span class="code-keyword">extends</span> Engineer {
+  <span class="code-keyword">constructor</span>() {
+    <span class="code-keyword">this</span>.stack = [<span class="code-string">".NET Core"</span>, <span class="code-string">"Java"</span>];
+    <span class="code-keyword">this</span>.passion = <span class="code-string">"Clean Architecture"</span>;
+  }
+
+  <span class="code-func">buildSecureSystems</span>() {
+    <span class="code-keyword">return</span> <span class="code-keyword">new</span> Future();
+  }
+}`;a.typewriter.innerHTML=o}function e(){if(!a.scrambleText)return;const o="ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()",s=a.scrambleText.dataset.value;let n=0;const c=setInterval(()=>{a.scrambleText.innerText=s.split("").map((u,m)=>m<n?s[m]:o[Math.floor(Math.random()*o.length)]).join(""),n>=s.length&&clearInterval(c),n+=1/3},30)}function l(){const o=document.querySelectorAll("section");let s="";o.forEach(n=>{const c=n.offsetTop;scrollY>=c-200&&(s=n.getAttribute("id"))}),a.navLinks.forEach(n=>{n.classList.remove("active"),n.getAttribute("href").includes(s)&&n.classList.add("active")})}window.addEventListener("scroll",l,{passive:!0}),r(),e()}
