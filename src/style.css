@@ -233,19 +233,25 @@ a {
 nav {
     position: fixed;
     top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
+
+    left: 20px;
+    transform: none;
+
     background: rgba(39, 39, 42, 0.75);
     backdrop-filter: blur(20px);
-    /* Lighter glass */
     border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 14px 35px;
+    padding: 10px 25px;
     border-radius: 50px;
     display: flex;
-    gap: 35px;
+    align-items: center;
+    gap: 25px;
     z-index: 100;
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+
+    max-width: calc(100% - 40px);
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 nav a {
@@ -896,39 +902,34 @@ section {
 }
 
 @media (max-width: 900px) {
-
-    .hero-grid,
-    .contact-grid,
-    .grid-2 {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
-    .hero {
-        text-align: center;
-        justify-content: center;
-        padding-top: 130px;
-    }
-
-    .hero-btns {
-        justify-content: center;
-    }
-
     nav {
-        width: 90%;
-        justify-content: space-between;
-        padding: 12px 20px;
+        left: 15px;
         top: 15px;
+        width: auto;
+        max-width: 92vw;
+        padding: 10px 20px;
+        gap: 15px;
+        justify-content: flex-start;
+
+
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
-    .spotlight-card:hover {
-        transform: none;
-    }
-
-    h1 {
-        font-size: 2.8rem;
+    nav::-webkit-scrollbar {
+        display: none;
     }
 }
+
+.spotlight-card:hover {
+    transform: none;
+}
+
+h1 {
+    font-size: 2.8rem;
+}
+
+
 /* -----------------------------------------------------------
    9. PROFILE IMAGE
 ----------------------------------------------------------- */
@@ -939,8 +940,8 @@ section {
     margin: 0 auto;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 
@@ -954,7 +955,7 @@ section {
     width: 100%;
     height: auto;
     display: block;
-    filter:  grayscale(10%) contrast(1.1);
+    filter: grayscale(10%) contrast(1.1);
     transition: filter 0.4s;
 }
 
@@ -968,7 +969,7 @@ section {
     position: absolute;
     inset: 0;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     pointer-events: none;
     z-index: 2;
 }
