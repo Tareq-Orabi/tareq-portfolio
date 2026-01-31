@@ -234,24 +234,23 @@ nav {
     position: fixed;
     top: 25px;
     left: 50%;
+    /* Centering */
     transform: translateX(-50%);
+    /* Backward offset to ensure accurate centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    /* Essential solution: Ensure the width doesn't conflict with centering */
+    width: max-content;
+    max-width: 90vw;
+    /* Your own aesthetic */
     background: rgba(39, 39, 42, 0.75);
     backdrop-filter: blur(20px);
-    /* Lighter glass */
     border: 1px solid rgba(255, 255, 255, 0.05);
     padding: 14px 35px;
     border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    /* Center items */
-    width: max-content;
-    /* Hug content */
-    max-width: 90vw;
-    /* Prevent overflow */
-    gap: 35px;
-    z-index: 100;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000;
 }
 
 nav a {
