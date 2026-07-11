@@ -1,0 +1,115 @@
+/* ----------------------------------------------------------------
+   HUD DETAILING (Cinematic Portfolio Upgrade)
+   ---------------------------------------------------------------- */
+
+.hud-container {
+  position: relative;
+  width: 100%;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Corner Ticks Overlay */
+.hud-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hud-corners::before {
+  top: 0;
+  left: 0;
+  /* Top Left & Top Right */
+  background:
+    linear-gradient(to right, rgba(200, 154, 24, 0.5) 20px, transparent 20px) top left / 100% 2px no-repeat,
+    linear-gradient(to bottom, rgba(200, 154, 24, 0.5) 20px, transparent 20px) top left / 2px 100% no-repeat,
+    linear-gradient(to left, rgba(200, 154, 24, 0.5) 20px, transparent 20px) top right / 100% 2px no-repeat,
+    linear-gradient(to bottom, rgba(200, 154, 24, 0.5) 20px, transparent 20px) top right / 2px 100% no-repeat;
+}
+
+.hud-corners::after {
+  bottom: 0;
+  left: 0;
+  /* Bottom Left & Bottom Right */
+  background:
+    linear-gradient(to right, rgba(200, 154, 24, 0.5) 20px, transparent 20px) bottom left / 100% 2px no-repeat,
+    linear-gradient(to top, rgba(200, 154, 24, 0.5) 20px, transparent 20px) bottom left / 2px 100% no-repeat,
+    linear-gradient(to left, rgba(200, 154, 24, 0.5) 20px, transparent 20px) bottom right / 100% 2px no-repeat,
+    linear-gradient(to top, rgba(200, 154, 24, 0.5) 20px, transparent 20px) bottom right / 2px 100% no-repeat;
+}
+
+/* Subtle Scanning Lines Overlay */
+.scanline-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(200, 154, 24, 0.03) 3px,
+      rgba(200, 154, 24, 0.03) 4px);
+  mix-blend-mode: color-dodge;
+  z-index: 10;
+  opacity: 0.6;
+}
+
+/* HUD Label / Micro Coordinate */
+.hud-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  background: rgba(200, 154, 24, 0.08);
+  border: 1px solid rgba(200, 154, 24, 0.20);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
+/* Low Opacity Grid Fragment */
+.hud-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  z-index: 1;
+}
+
+/* Inner Glow Interactive Effect */
+.inner-glow-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner-glow-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(200, 154, 24, 0.08),
+      transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.inner-glow-container:hover::before {
+  opacity: 1;
+}

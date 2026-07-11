@@ -1,0 +1,77 @@
+/* ======================================================
+   APP LAYOUT — Performance Safe
+   ====================================================== */
+
+.app-shell {
+    position: relative;
+    min-height: 100vh;
+    background: transparent;
+    overflow-x: clip;
+    isolation: isolate;
+}
+
+.app-main {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+}
+
+/* كل sections داخل app-main */
+.app-main>section {
+    position: relative;
+    width: 100%;
+    scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    overflow: clip;
+}
+
+/* Hero لا تلمسه لأنه LCP */
+.app-main>section#hero {
+    scroll-margin-top: 0;
+    margin-bottom: 0;
+    content-visibility: visible;
+    contain-intrinsic-size: auto;
+}
+
+/* 
+   content-visibility فقط للأقسام العادية
+   لا تستخدمه على hero أو sections فيها canvas حساس أو sticky
+*/
+.app-main>section:not(#hero):not(.no-content-visibility) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 760px;
+    contain: layout paint style;
+}
+
+/* Sections التي فيها canvas أو effects قوية */
+.app-main>section.has-canvas,
+.app-main>section.has-sticky,
+.app-main>section.no-content-visibility {
+    content-visibility: visible;
+    contain-intrinsic-size: auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .app-main>section {
+        scroll-margin-top: calc(var(--nav-height) + 1rem);
+        margin-bottom: 3rem;
+    }
+
+    .app-main>section:not(#hero):not(.no-content-visibility) {
+        contain-intrinsic-size: auto 640px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .app-main>section {
+        margin-bottom: 2.5rem;
+    }
+
+    .app-main>section:not(#hero):not(.no-content-visibility) {
+        contain-intrinsic-size: auto 560px;
+    }
+}

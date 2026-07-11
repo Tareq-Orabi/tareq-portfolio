@@ -1,0 +1,664 @@
+/* ═══════════════════════════════════════════
+   COSMIC VIDEO HERO
+   Full-screen / clear video / white glow text / optimized INP
+   ═══════════════════════════════════════════ */
+
+.cosmic-hero {
+  --bg-base: #0C0C0D;
+  --bg-deep: #111113;
+
+  --gold: #C89A18;
+
+  --text-main: rgba(255, 255, 255, 0.98);
+  --text-soft: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.72);
+
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  min-height: auto;
+  padding: clamp(1rem, 2.2vw, 2rem);
+  display: flex;
+  justify-content: center;
+  color: var(--text-main);
+  contain: layout paint;
+}
+
+.cosmic-hero-frame {
+  position: relative;
+  width: min(1440px, 100%);
+  min-height: clamp(620px, 82svh, 860px);
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: clamp(24px, 3vw, 42px);
+  border: none;
+  background: var(--bg-base);
+  box-shadow:
+    0 0 80px rgba(200, 154, 24, 0.08),
+    inset 0 0 180px rgba(200, 154, 24, 0.04);
+}
+
+/* Video */
+
+.cosmic-bg-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Lightweight overlays */
+
+.cosmic-color-grade,
+.cosmic-depth-mask,
+.cosmic-star-noise,
+.cosmic-vignette,
+.cosmic-architecture {
+  pointer-events: none;
+}
+
+.cosmic-color-grade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(200, 154, 24, 0.08), transparent 34%),
+    radial-gradient(circle at 76% 26%, rgba(200, 154, 24, 0.06), transparent 36%),
+    linear-gradient(135deg,
+      rgba(12, 12, 13, 0.28) 0%,
+      rgba(12, 12, 13, 0.12) 45%,
+      rgba(200, 154, 24, 0.05) 100%);
+}
+
+.cosmic-depth-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg,
+      rgba(4, 4, 6, 0.32) 0%,
+      rgba(4, 4, 6, 0.12) 32%,
+      rgba(4, 4, 6, 0.2) 100%),
+    linear-gradient(90deg,
+      rgba(4, 4, 6, 0.76) 0%,
+      rgba(4, 4, 6, 0.34) 26%,
+      rgba(4, 4, 6, 0.08) 52%,
+      rgba(4, 4, 6, 0.3) 100%);
+}
+
+.cosmic-star-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.055;
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.78) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 58%, rgba(200, 154, 24, 0.42) 0 1px, transparent 1px),
+    radial-gradient(circle at 42% 76%, rgba(200, 154, 24, 0.48) 0 1px, transparent 1px);
+  background-size: 39px 39px, 67px 67px, 91px 91px;
+  mix-blend-mode: screen;
+}
+
+.cosmic-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background:
+    radial-gradient(circle at 50% 50%,
+      transparent 0%,
+      rgba(4, 4, 6, 0.16) 62%,
+      rgba(4, 4, 6, 0.68) 100%);
+}
+
+/* Static architecture lines */
+
+.cosmic-architecture {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  opacity: 0.34;
+}
+
+.arch-path {
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 8 18;
+  filter: drop-shadow(0 0 8px rgba(200, 154, 24, 0.20));
+  animation: none;
+}
+
+.path-a {
+  stroke: rgba(200, 154, 24, 0.28);
+}
+
+.path-b {
+  stroke: rgba(200, 154, 24, 0.18);
+}
+
+.path-c {
+  stroke: rgba(200, 154, 24, 0.14);
+}
+
+.arch-node {
+  fill: var(--gold);
+  filter:
+    drop-shadow(0 0 8px rgba(200, 154, 24, 0.75)) drop-shadow(0 0 18px rgba(200, 154, 24, 0.40));
+}
+
+/* Content */
+
+.cosmic-content {
+  position: relative;
+  z-index: 10;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: clamp(1rem, 2.4vw, 1.75rem);
+  pointer-events: none;
+}
+
+.cosmic-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  padding: clamp(5rem, 9vw, 7.5rem) clamp(1rem, 3vw, 3.5rem) clamp(2rem, 4vw, 3rem);
+  pointer-events: none;
+}
+
+.cosmic-thesis {
+  width: min(820px, 100%);
+  position: relative;
+  z-index: 2;
+}
+
+/* Text */
+
+.cosmic-overline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  margin-bottom: 1.1rem;
+  padding: 0.52rem 0.82rem;
+  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(7, 7, 11, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.76rem;
+  font-weight: 740;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.16),
+    0 0 16px rgba(255, 255, 255, 0.1);
+}
+
+.cosmic-overline svg {
+  color: var(--gold);
+  filter: drop-shadow(0 0 8px rgba(200, 154, 24, 0.55));
+}
+
+.cosmic-kicker {
+  margin: 0 0 0.7rem;
+  color: #ffffff;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: clamp(0.66rem, 1vw, 0.76rem);
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.cosmic-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.03em;
+  width: fit-content;
+  font-family: var(--font-display, Inter, system-ui, sans-serif);
+  line-height: 0.82;
+  font-weight: 950;
+  letter-spacing: -0.085em;
+}
+
+.title-word {
+  display: block;
+  width: fit-content;
+  color: #ffffff;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.34),
+    0 0 18px rgba(255, 255, 255, 0.26),
+    0 0 34px rgba(255, 255, 255, 0.18),
+    0 0 58px rgba(200, 154, 24, 0.14);
+}
+
+.title-first {
+  font-size: clamp(4.2rem, 10.2vw, 8.9rem);
+}
+
+.title-last {
+  font-size: clamp(4.3rem, 10.6vw, 9.4rem);
+  margin-left: clamp(1.2rem, 4.2vw, 3.6rem);
+}
+
+.cosmic-role {
+  margin: 0.65rem 0 0;
+  max-width: 780px;
+  color: #ffffff;
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  line-height: 1.14;
+  letter-spacing: -0.04em;
+  font-weight: 820;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.22),
+    0 0 22px rgba(255, 255, 255, 0.14);
+}
+
+.cosmic-role span {
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgba(200, 154, 24, 0.80),
+    0 0 24px rgba(200, 154, 24, 0.40);
+}
+
+.cosmic-description {
+  max-width: 780px;
+  margin: 0.95rem 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  line-height: 1.76;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.12),
+    0 0 14px rgba(255, 255, 255, 0.08);
+}
+
+/* Chips */
+
+.cosmic-focus-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  max-width: 860px;
+  pointer-events: auto;
+}
+
+.cosmic-focus-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  padding: 0.58rem 0.82rem;
+  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(7, 7, 11, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  font-size: 0.76rem;
+  font-weight: 740;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.16),
+    0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+.cosmic-focus-chip svg {
+  color: var(--gold);
+  filter: drop-shadow(0 0 7px rgba(200, 154, 24, 0.55));
+}
+
+/* Footer */
+
+.cosmic-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(260px, 440px);
+  align-items: end;
+  gap: 1rem;
+  padding: 0 clamp(1rem, 3vw, 3.5rem) clamp(1rem, 2vw, 1.4rem);
+}
+
+.cosmic-principles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cosmic-principle {
+  min-width: 180px;
+  min-height: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.86rem;
+  border-radius: 18px;
+  color: #ffffff;
+  background: rgba(7, 7, 11, 0.36);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cosmic-principle span {
+  color: #ffffff;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.68rem;
+  font-weight: 850;
+  text-shadow:
+    0 0 8px rgba(200, 154, 24, 0.65),
+    0 0 16px rgba(200, 154, 24, 0.30);
+}
+
+.cosmic-principle strong {
+  color: #ffffff;
+  font-size: 0.86rem;
+  letter-spacing: -0.025em;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.15),
+    0 0 14px rgba(255, 255, 255, 0.08);
+}
+
+.cosmic-footer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  color: #ffffff;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.075em;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.14),
+    0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+.cosmic-brand,
+.cosmic-top-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cosmic-brand span:last-child {
+  color: #ffffff;
+  font-weight: 850;
+}
+
+.cosmic-brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow:
+    0 0 14px rgba(200, 154, 24, 0.85),
+    0 0 34px rgba(200, 154, 24, 0.45);
+}
+
+.cosmic-bottom-note {
+  max-width: 440px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: right;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.68rem;
+  line-height: 1.65;
+  letter-spacing: 0.06em;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.12),
+    0 0 14px rgba(255, 255, 255, 0.08);
+}
+
+/* Optional: very slow SVG motion only on capable desktop */
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .arch-path {
+    animation: architectureFlow 70s linear infinite;
+  }
+
+  .path-b {
+    animation-direction: reverse;
+    animation-duration: 85s;
+  }
+
+  .path-c {
+    animation-duration: 95s;
+  }
+}
+
+@keyframes architectureFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -260;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 1120px) {
+  .cosmic-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .cosmic-bottom-note {
+    text-align: left;
+  }
+}
+
+@media (max-width: 760px) {
+  .cosmic-hero-frame {
+    width: 100%;
+    min-height: 100svh;
+    border-radius: 0;
+  }
+
+  .cosmic-content {
+    min-height: 100svh;
+    padding: 0.9rem;
+  }
+
+  .cosmic-stage {
+    padding: 5rem 0.2rem 2rem;
+    align-items: center;
+  }
+
+  .cosmic-title {
+    letter-spacing: -0.075em;
+  }
+
+  .title-first {
+    font-size: clamp(3.6rem, 19vw, 5.6rem);
+  }
+
+  .title-last {
+    font-size: clamp(3.8rem, 19.8vw, 5.9rem);
+    margin-left: clamp(0.8rem, 8vw, 2rem);
+  }
+
+  .cosmic-role {
+    font-size: clamp(1.15rem, 6vw, 1.55rem);
+  }
+
+  .cosmic-description {
+    font-size: 0.95rem;
+  }
+
+  .cosmic-focus-inline {
+    gap: 0.55rem;
+  }
+
+  .cosmic-focus-chip {
+    font-size: 0.72rem;
+  }
+
+  .cosmic-principles {
+    flex-direction: column;
+  }
+
+  .cosmic-principle {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cosmic-footer-meta {
+    font-size: 0.58rem;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .arch-path {
+    animation: none !important;
+  }
+
+  .cosmic-bg-video {
+    transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   PERFORMANCE OVERRIDES
+   Add this at the END of Hero.css
+   ═══════════════════════════════════════════ */
+
+.cosmic-hero {
+  contain: layout paint style;
+}
+
+.cosmic-hero-frame {
+  box-shadow:
+    inset 0 0 120px rgba(200, 154, 24, 0.035);
+}
+
+.cosmic-bg-static {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(200, 154, 24, 0.07), transparent 34%),
+    radial-gradient(circle at 76% 26%, rgba(200, 154, 24, 0.05), transparent 36%),
+    linear-gradient(135deg, #0C0C0D 0%, #111113 52%, #141416 100%);
+}
+
+/* لا تستخدم mix-blend-mode على fullscreen */
+.cosmic-star-noise {
+  display: none;
+}
+
+/* خفف طبقات الخلفية */
+.cosmic-color-grade {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(200, 154, 24, 0.07), transparent 34%),
+    radial-gradient(circle at 76% 26%, rgba(200, 154, 24, 0.05), transparent 36%);
+}
+
+.cosmic-depth-mask {
+  background:
+    linear-gradient(90deg,
+      rgba(4, 4, 6, 0.72) 0%,
+      rgba(4, 4, 6, 0.24) 42%,
+      rgba(4, 4, 6, 0.28) 100%);
+}
+
+.cosmic-vignette {
+  background:
+    radial-gradient(circle at 50% 50%,
+      transparent 0%,
+      rgba(4, 4, 6, 0.12) 68%,
+      rgba(4, 4, 6, 0.58) 100%);
+}
+
+/* أوقف أنيميشن SVG لأنها تسبب repaint مستمر */
+.arch-path {
+  animation: none !important;
+  filter: none !important;
+}
+
+.arch-node {
+  filter: none !important;
+}
+
+/* خفف text-shadow: النصوص الثقيلة كانت كثيرة جدًا */
+.title-word {
+  text-shadow:
+    0 0 14px rgba(255, 255, 255, 0.22),
+    0 0 34px rgba(200, 154, 24, 0.10);
+}
+
+.cosmic-role,
+.cosmic-description,
+.cosmic-kicker,
+.cosmic-overline,
+.cosmic-focus-chip,
+.cosmic-principle span,
+.cosmic-principle strong,
+.cosmic-footer-meta,
+.cosmic-bottom-note {
+  text-shadow: none;
+}
+
+/* لا تستخدم filter على الأيقونات */
+.cosmic-overline svg,
+.cosmic-focus-chip svg {
+  filter: none !important;
+}
+
+/* ظل أخف للكروت */
+.cosmic-focus-chip {
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.cosmic-brand-dot {
+  box-shadow:
+    0 0 14px rgba(200, 154, 24, 0.55);
+}
+
+/* الموبايل: لا SVG architecture ولا ظلال ضخمة */
+@media (max-width: 760px) {
+  .cosmic-architecture {
+    display: none;
+  }
+
+  .cosmic-hero-frame {
+    box-shadow: none;
+  }
+
+  .title-word {
+    text-shadow:
+      0 0 12px rgba(255, 255, 255, 0.18);
+  }
+
+  .cosmic-color-grade {
+    opacity: 0.75;
+  }
+
+  .cosmic-depth-mask {
+    opacity: 0.9;
+  }
+}
+
+/* احترام reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .cosmic-bg-video,
+  .cosmic-architecture,
+  .cosmic-star-noise {
+    display: none !important;
+  }
+
+  .arch-path {
+    animation: none !important;
+  }
+}
